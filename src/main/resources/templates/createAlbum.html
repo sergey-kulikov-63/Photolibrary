@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание альбома</title>
+</head>
+<body>
+<h2>Создать новый альбом</h2>
+<form action="/albums/create" method="post" enctype="multipart/form-data">
+    <label for="name">Имя альбома:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="photos">Фотографии:</label>
+    <input type="file" id="photos" name="photos" multiple><br>
+
+    <button type="submit">Создать альбом</button>
+</form>
+</body>
+</html>

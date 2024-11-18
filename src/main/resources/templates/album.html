@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${album.getName()}"></title>
+</head>
+<body>
+<h1 th:text="${album.getName()}"></h1>
+<div th:each="photo : ${album.getPhotos()}">
+    <img class="photo" th:src="'data:image/jpeg;base64,' + ${photo.getImageData()}">
+</div>
+<a th:href="'/albums/' + ${album.getId()} + '/delete'">
+    <button style="padding: 10px">Удалить альбом</button>
+</a>
+</body>
+</html>
+<style>
+    .photo{
+        height: 200px;
+        max-width: 200px;
+    }
+    .photo:hover{
+        border: black 5px solid;
+        scale: 1.05;
+        max-width: 100%;
+    }
+</style>

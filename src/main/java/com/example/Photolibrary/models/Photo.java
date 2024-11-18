@@ -11,13 +11,13 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String photoname;
-    @Lob
-    private byte[] imageData;
+    @Column(columnDefinition = "TEXT")
+    private String imageData;
     @ManyToOne
     @JoinColumn(name = "album_id")
     private Album album;
 
-    public Photo(String photoname, byte[] imageData) {
+    public Photo(String photoname, String imageData) {
         this.photoname = photoname;
         this.imageData = imageData;
     }
