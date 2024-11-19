@@ -4,24 +4,59 @@
     <meta charset="UTF-8">
     <title th:text="${album.getName()}"></title>
 </head>
-<body>
-<h1 th:text="${album.getName()}"></h1>
-<div th:each="photo : ${album.getPhotos()}">
-    <img class="photo" th:src="'data:image/jpeg;base64,' + ${photo.getImageData()}">
+<body style="display: block; text-align: center">
+
+<h1 id="albumName" align="center" th:text="${album.getName()}"></h1>
+
+<div style="font-size: 20px; color: #555; margin-top: 20px;" id="loading-text">Загрузка...</div>
+
+<div style="display: none;" class="photo-container" id="photo-container">
+    <div th:each="photo : ${album.getPhotos()}">
+        <img class="photo" th:src="'data:image/jpeg;base64,' + ${photo.getImageData()}">
+    </div>
 </div>
-<a th:href="'/albums/' + ${album.getId()} + '/delete'">
-    <button style="padding: 10px">Удалить альбом</button>
-</a>
+
+<form th:action="'/albums/' + ${album.getId()} + '/delete'" method="post">
+    <button id="delBut" type="submit" style="padding: 10px; margin-top: 10px;">Удалить альбом</button>
+</form>
+
+<script defer>
+    document.addEventListener('DOMContentLoaded',function (){
+        setTimeout(function () {
+            document.getElementById("photo-container").style.display = 'flex';
+            document.getElementById("loading-text").style.display = 'none';
+        }, 0)
+    });
+    const photos = document.querySelectorAll('.photo');
+    let currentIndex = -1;
+    photos.forEach((photo, index) => {
+        photo.addEventListener('click', () => {
+            currentIndex = index;
+            photo.requestFullscreen();
+        });
+    });
+    document.addEventListener('keydown', (e) => {
+        if (document.fullscreenElement) {
+            if (e.key === 'ArrowRight' && currentIndex < photos.length - 1) {
+                photos[++currentIndex].requestFullscreen();
+            } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                photos[--currentIndex].requestFullscreen();
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
 <style>
-    .photo{
+    .photo-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 5px;
+    }
+    .photo {
         height: 200px;
         max-width: 200px;
-    }
-    .photo:hover{
-        border: black 5px solid;
-        scale: 1.05;
-        max-width: 100%;
     }
 </style>

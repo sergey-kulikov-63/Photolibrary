@@ -18,7 +18,9 @@ public class Album {
 
     public Album(String name) {
         this.name = name;
+
     }
+
     public Album() {
 
     }

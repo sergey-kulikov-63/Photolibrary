@@ -4,15 +4,40 @@
     <meta charset="UTF-8">
     <title>Фотобиблиотека</title>
 </head>
-<body>
-<h2>Все альбомы</h2>
-<a href="/albums/create">
-    <button>Добавить новый альбом</button>
+<body style="text-align: center">
+
+<a th:href="'/albums/' + ${album.id}" class="album" th:each="album : ${albums}">
+    <h2 th:text="${album.name}"></h2>
 </a>
-<div th:each="album : ${albums}">
-    <a th:href="'/albums/' + ${album.id}">
-        <h2 th:text="${album.name}"></h2>
-    </a>
-</div>
+
+<a href="/albums/create">
+    <button style="padding: 10px">Добавить новый альбом</button>
+</a>
+
+
 </body>
 </html>
+
+<style>
+    body {
+        padding: 5px;
+    }
+    a {
+        text-decoration: none;
+        color: #000000;
+    }
+    a:hover h2 {
+        color: #000000;
+    }
+    .album {
+        display: block;
+        background: #d5d5d5;
+        text-align: center;
+        border: gray 1px solid;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    .album:hover {
+        scale: 1.02;
+    }
+</style>

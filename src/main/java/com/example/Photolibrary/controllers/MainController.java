@@ -2,7 +2,6 @@ package com.example.Photolibrary.controllers;
 
 import com.example.Photolibrary.models.Album;
 import com.example.Photolibrary.models.Photo;
-import com.example.Photolibrary.repos.AlbumRepo;
 import com.example.Photolibrary.services.AlbumService;
 import com.example.Photolibrary.services.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 public class MainController {
@@ -25,6 +23,7 @@ public class MainController {
     private AlbumService albumService;
     @Autowired
     private PhotoService photoService;
+
     @GetMapping("/")
     public String redirect() {
         return "redirect:/albums";
